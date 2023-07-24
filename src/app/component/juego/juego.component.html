@@ -1,0 +1,19 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-2" *ngFor="let carta of cartas">
+          <div class="card-container">
+            <div class="cardd" id="card{{carta.id}}">
+              <div class="front" (click)="flipCard(carta.id)">
+                <p>{{carta.valor}}</p>
+              </div>
+              <div class="back" (click)="flipCard(carta.id)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
