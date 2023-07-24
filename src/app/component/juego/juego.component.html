@@ -5,10 +5,10 @@
         <div class="col" *ngFor="let carta of cartas; let i = index">
           <div class="card-container">
             <div class="cardd" id="card{{i+1}}">
-              <div class="front" (click)="flipCard(i+1)">
+              <div class="front" (click)="seleccionarCarta(carta, i+1)">
                 <small>{{carta.valor}}</small>
               </div>
-              <div class="back" (click)="flipCard(i+1)"></div>
+              <div class="back" (click)="seleccionarCarta(carta, i+1)"></div>
             </div>
           </div>
         </div>

@@ -10,6 +10,12 @@ import { CartaService } from 'src/app/service/carta.service';
 export class JuegoComponent {
 
   cartas:Carta[] = [];
+  valorCarta1:string = '';
+  valorCarta2:string = '';
+  idCarta1:number = 0;
+  idCarta2:number = 0;
+
+  resultadoComparacion:boolean = false;
 
   constructor(private cartaService:CartaService){
     this.obtenerCartas();
@@ -34,8 +40,69 @@ export class JuegoComponent {
     return arrayOriginal;
   }
 
-  flipCard(id:number) {
+  seleccionarCarta(carta:Carta , id:number) {
+    // 1º voltea la carta
+    this.voltearCarta(id);
+    // 2º asigna valor a la carta que no tenga
+    this.asignarCartas(carta, id);
+    // 3º pregunta si tienen valor asignado y compara de ser verdadero
+    if(this.tienenValorAsignado()) this.resultadoComparacion = this.compararCartas();
+    // 4º si es verdadero las anula si es falso  las vuelve a voltear
+    if(this.resultadoComparacion){
+      console.log("HAcer algo porque es verdadero")
+    }
+  }
+
+  voltearCarta(id:number){
     const card = document.getElementById("card"+id);
     card!.style.transform = card!.style.transform === "rotateY(180deg)" ? "rotateY(0)" : "rotateY(180deg)";
+  }
+
+  asignarCartas(carta:Carta, id:number){
+    if (this.valorCarta1 === '') {
+      this.valorCarta1 = carta.valor;
+      this.idCarta1 = id;
+      return;
+    }else if (this.valorCarta2 === ''){
+      this.valorCarta2 = carta.valor;
+      this.idCarta2 = id;
+      return;
+    };
+  }
+
+  tienenValorAsignado(){
+    console.log("Valor carta 1: ", this.valorCarta1);
+    console.log("Valor carta 2: ", this.valorCarta2);
+    return (this.valorCarta1 && this.valorCarta2);
+  }
+
+  compararCartas(){
+    const sonIguales = this.valorCarta1 === this.valorCarta2;
+    console.log("Son iguales?: ",sonIguales);
+    if(!sonIguales) this.volverAvoltear();
+    return sonIguales;
+  }
+
+  esperarDosSegundos(): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
+  }
+
+  volvesValoresIniciales(){
+    this.valorCarta1 = '';
+    this.valorCarta2 = '';
+    this.idCarta1 = 0;
+    this.idCarta2 = 0;
+  }
+
+  volverAvoltear(){
+      this.esperarDosSegundos().then(() =>{
+        this.voltearCarta(this.idCarta1);
+        this.voltearCarta(this.idCarta2);
+        this.volvesValoresIniciales();
+      });
   }
 }
