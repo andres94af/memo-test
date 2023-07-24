@@ -1,5 +1,5 @@
 .card-container {
-  width: 100%;
+  width: 5rem;;
   margin-bottom: 1rem;
   aspect-ratio: 1/1.5;
   perspective: 800px;
@@ -22,6 +22,7 @@
 }
 
 .front {
+  transform: rotateY(180deg);
   background-color: #ffffff;
   border: 1px solid #000000;
   border-radius: 5px;
@@ -29,7 +30,6 @@
 }
 
 .back {
-  transform: rotateY(180deg);
   background: radial-gradient(green,yellow,red,blue);
   border: 1px solid #000000;
   border-radius: 5px;

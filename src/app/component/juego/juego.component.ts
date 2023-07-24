@@ -19,10 +19,19 @@ export class JuegoComponent {
     this.cartaService.obtenerCartas().subscribe({
       next: cartas => {
         this.cartas = Object.values(cartas);
-        console.log(cartas)
+        this.cartas = this.duplicarYDesordenarArray(this.cartas);
       },
       error: err => console.log(err)
     });
+  }
+
+  duplicarYDesordenarArray<Carta>(arr: Carta[]): Carta[] {
+    const arrayOriginal = arr.concat(arr);
+    for (let i = arrayOriginal.length - 1; i > 0; i--) {
+      const indiceRandom = Math.floor(Math.random() * (i + 1));
+      [arrayOriginal[i], arrayOriginal[indiceRandom]] = [arrayOriginal[indiceRandom], arrayOriginal[i]];
+    }
+    return arrayOriginal;
   }
 
   flipCard(id:number) {
