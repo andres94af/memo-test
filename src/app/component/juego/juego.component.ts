@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Carta } from 'src/app/models/carta';
 import { CartaService } from 'src/app/service/carta.service';
 
@@ -11,6 +11,7 @@ export class JuegoComponent {
   cartas: Carta[] = [];
 
   tiempo: number = 0;
+  intervalo: any;
 
   contadorMovimientos: number = 0;
 
@@ -24,6 +25,7 @@ export class JuegoComponent {
 
   constructor(private cartaService: CartaService) {
     this.obtenerCartas();
+    this.iniciarContador();
   }
 
   obtenerCartas() {
@@ -60,8 +62,8 @@ export class JuegoComponent {
       // 4º si es verdadero las anula si es falso  las vuelve a voltear
       if (this.resultadoComparacion) {
         console.log('Hacer algo porque es Verdadero');
+        this.inactivarCartas();
       } else {
-        console.log('Hacer algo porque es Falso');
         this.contadorMovimientos++;
         await this.volverAvoltear();
       }
@@ -70,34 +72,36 @@ export class JuegoComponent {
   }
 
   voltearCarta(id: number) {
-    const card = document.getElementById('card' + id);
+    const card = document.getElementById('tarjeta' + id);
     card!.style.transform =
       card!.style.transform === 'rotateY(180deg)'
         ? 'rotateY(0)'
         : 'rotateY(180deg)';
   }
 
+  inactivarCartas(){
+    const card1 = document.getElementById('tarjeta' + this.idCarta1);
+    const card2 = document.getElementById('tarjeta' + this.idCarta2);
+    card1?.classList.add('inactivo');
+    card2?.classList.add('inactivo');
+  }
+
   asignarCartas(carta: Carta, id: number) {
     if (this.valorCarta1 === '') {
       this.valorCarta1 = carta.valor;
       this.idCarta1 = id;
-      return;
     } else if (this.valorCarta2 === '') {
       this.valorCarta2 = carta.valor;
       this.idCarta2 = id;
-      return;
     }
   }
 
   tienenValorAsignado() {
-    console.log('Valor carta 1: ', this.valorCarta1);
-    console.log('Valor carta 2: ', this.valorCarta2);
-    return this.valorCarta1 && this.valorCarta2;
+    return this.valorCarta1 !='' && this.valorCarta2 != '';
   }
 
   compararCartas() {
     const sonIguales = this.valorCarta1 === this.valorCarta2;
-    console.log('Son iguales?: ', sonIguales);
     return sonIguales;
   }
 
@@ -117,5 +121,27 @@ export class JuegoComponent {
         resolve();
       }, 1000);
     });
+  }
+
+  iniciarContador() {
+    this.intervalo = setInterval(() => {
+      this.tiempo++;
+    }, 1000);
+  }
+
+  detenerContador() {
+    clearInterval(this.intervalo);
+  }
+
+  tiempoFormateado(): string {
+    const minutos = Math.floor(this.tiempo / 60);
+    const segundos = this.tiempo % 60;
+
+    return `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  antesDeSalirDeLaPagina($event: any) {
+    $event.returnValue = true;
   }
 }

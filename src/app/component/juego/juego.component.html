@@ -1,21 +1,22 @@
 <div class="container mt-3">
-  <div class="row">
+  <div class="row justify-content-between">
     <div class="col-md-6">
       <div class="row">
         <div class="col" *ngFor="let carta of cartas; let i = index">
           <div class="card-container">
-            <div class="cardd" id="card{{i+1}}">
-              <div class="front" (click)="seleccionarCarta(carta, i+1)">
+            <div class="tarjeta" id="tarjeta{{i+1}}">
+              <div class="frente" (click)="seleccionarCarta(carta, i+1)">
                 <small>{{carta.valor}}</small>
               </div>
-              <div class="back" (click)="seleccionarCarta(carta, i+1)"></div>
+              <div class="dorso" (click)="seleccionarCarta(carta, i+1)"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <h4>Movimientos: {{contadorMovimientos}}</h4>
+      <h4>Tiempo: {{tiempoFormateado()}}</h4>
     </div>
   </div>
 </div>
