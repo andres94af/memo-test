@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { Carta } from 'src/app/models/carta';
 import { CartaService } from 'src/app/service/carta.service';
 
@@ -14,6 +15,7 @@ export class JuegoComponent {
   intervalo: any;
 
   contadorMovimientos: number = 0;
+  contadorAciertos:number = 0;
 
   valorCarta1: string = '';
   idCarta1: number = 0;
@@ -23,7 +25,7 @@ export class JuegoComponent {
 
   resultadoComparacion: boolean = false;
 
-  constructor(private cartaService: CartaService) {
+  constructor(private cartaService: CartaService, private router:Router) {
     this.obtenerCartas();
     this.iniciarContador();
   }
@@ -61,14 +63,25 @@ export class JuegoComponent {
 
       // 4º si es verdadero las anula si es falso  las vuelve a voltear
       if (this.resultadoComparacion) {
-        console.log('Hacer algo porque es Verdadero');
-        this.inactivarCartas();
+        this.contadorAciertos++;
+        await this.inactivarCartas();
       } else {
-        this.contadorMovimientos++;
         await this.volverAvoltear();
       }
+      this.contadorMovimientos++;
       this.volverValoresIniciales();
     }
+
+    // 5º Si el contador de aciertos llega a 12 finaliza el juego
+    if (this.contadorAciertos === 12) {
+      this.finalizarJuego();
+    }
+  }
+  finalizarJuego() {
+    var jugador = prompt('Lo lograste! Ingresa tu nombre', 'Jugador');
+    alert('Felicidades '+ jugador +'! Hiciste '+ this.contadorMovimientos +' movimientos. Tu tiempo fue: '+ this.tiempoFormateado());
+    this.cartaService.agregarGanador(jugador!, this.contadorMovimientos, this.tiempoFormateado());
+    this.router.navigate(['']);
   }
 
   voltearCarta(id: number) {
@@ -80,10 +93,15 @@ export class JuegoComponent {
   }
 
   inactivarCartas(){
-    const card1 = document.getElementById('tarjeta' + this.idCarta1);
-    const card2 = document.getElementById('tarjeta' + this.idCarta2);
-    card1?.classList.add('inactivo');
-    card2?.classList.add('inactivo');
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        const card1 = document.getElementById('frente' + this.idCarta1);
+        const card2 = document.getElementById('frente' + this.idCarta2);
+        card1?.classList.add('inactivo');
+        card2?.classList.add('inactivo');
+        resolve();
+      }, 1000);
+    });
   }
 
   asignarCartas(carta: Carta, id: number) {
@@ -140,8 +158,12 @@ export class JuegoComponent {
     return `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
   }
 
-  @HostListener('window:beforeunload', ['$event'])
-  antesDeSalirDeLaPagina($event: any) {
-    $event.returnValue = true;
+  reiniciar(){
+    window.location.reload();
   }
+
+  // @HostListener('window:beforeunload', ['$event'])
+  // antesDeSalirDeLaPagina($event: any) {
+  //   $event.returnValue = true;
+  // }
 }

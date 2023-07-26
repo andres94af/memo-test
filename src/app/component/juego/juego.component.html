@@ -5,10 +5,10 @@
         <div class="col" *ngFor="let carta of cartas; let i = index">
           <div class="card-container">
             <div class="tarjeta" id="tarjeta{{i+1}}">
-              <div class="frente" (click)="seleccionarCarta(carta, i+1)">
+              <div class="frente" id="frente{{i+1}}" (click)="seleccionarCarta(carta, i+1)">
                 <small>{{carta.valor}}</small>
               </div>
-              <div class="dorso" (click)="seleccionarCarta(carta, i+1)"></div>
+              <div class="dorso" id="frente{{i+1}}" (click)="seleccionarCarta(carta, i+1)"></div>
             </div>
           </div>
         </div>
@@ -16,7 +16,11 @@
     </div>
     <div class="col-md-5">
       <h4>Movimientos: {{contadorMovimientos}}</h4>
+      <h4>Aciertos: {{contadorAciertos}}</h4>
       <h4>Tiempo: {{tiempoFormateado()}}</h4>
+      <br>
+      <a (click)="reiniciar()" class="btn btn-warning me-3">Reiniciar</a>
+      <a [routerLink]="''" class="btn btn-danger">Volver</a>
     </div>
   </div>
 </div>
