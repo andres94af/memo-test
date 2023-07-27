@@ -34,34 +34,18 @@ export class JuegoComponent {
     this.cartaService.obtenerCartas().subscribe({
       next: (cartas) => {
         this.cartas = Object.values(cartas);
-        this.cartas = this.duplicarYDesordenarArray(this.cartas);
+        this.cartas = this.prepararCartas(this.cartas);
       },
       error: (err) => console.log(err),
     });
   }
 
-  duplicarYDesordenarArray<Carta>(arr: Carta[]): Carta[] {
-    const arrayOriginal = arr.concat(arr);
-    for (let i = arrayOriginal.length - 1; i > 0; i--) {
-      const indiceRandom = Math.floor(Math.random() * (i + 1));
-      [arrayOriginal[i], arrayOriginal[indiceRandom]] = [
-        arrayOriginal[indiceRandom],
-        arrayOriginal[i],
-      ];
-    }
-    return arrayOriginal;
-  }
-
   async seleccionarCarta(carta: Carta, id: number) {
-    // 1º voltea la carta
     this.voltearCarta(id);
-    // 2º asigna valor a la carta que no tenga
     this.asignarCartas(carta, id);
-    // 3º pregunta si tienen valor asignado y compara de ser verdadero
+    
     if (this.tienenValorAsignado()) {
       this.resultadoComparacion = this.compararCartas();
-
-      // 4º si es verdadero las anula si es falso  las vuelve a voltear
       if (this.resultadoComparacion) {
         this.contadorAciertos++;
         await this.inactivarCartas();
@@ -72,7 +56,6 @@ export class JuegoComponent {
       this.volverValoresIniciales();
     }
 
-    // 5º Si el contador de aciertos llega a 12 finaliza el juego
     if (this.contadorAciertos === 12) {
       this.finalizarJuego();
     }
@@ -162,8 +145,28 @@ export class JuegoComponent {
     window.location.reload();
   }
 
-  // @HostListener('window:beforeunload', ['$event'])
-  // antesDeSalirDeLaPagina($event: any) {
-  //   $event.returnValue = true;
-  // }
+  desordenarCartas(cartas:Carta[]){
+    const arrayOriginal = cartas;
+    for (let i = arrayOriginal.length - 1; i > 0; i--) {
+      const indiceRandom = Math.floor(Math.random() * (i + 1));
+      [arrayOriginal[i], arrayOriginal[indiceRandom]] = [
+        arrayOriginal[indiceRandom],
+        arrayOriginal[i],
+      ];
+    }
+    return arrayOriginal;
+  }
+
+  prepararCartas(cartas:Carta[]){
+    cartas = this.desordenarCartas(cartas);
+    cartas = cartas.slice(0,12);
+    cartas = cartas.concat(cartas);
+    cartas = this.desordenarCartas(cartas);
+    return cartas;
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  antesDeSalirDeLaPagina($event: any) {
+    $event.returnValue = true;
+  }
 }

@@ -3,3 +3,13 @@ body{
   background-image: url('./assets/cerebro.png');
   background-repeat: no-repeat;
 }
+
+.texto_bordes {
+  font-weight: bold;
+  color: white;
+  text-shadow: 
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
+}

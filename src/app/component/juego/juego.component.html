@@ -16,7 +16,7 @@
         <div class="col" *ngFor="let carta of cartas; let i = index">
           <div class="card-container">
             <div class="tarjeta text-center" id="tarjeta{{i+1}}">
-              <div class="frente" id="frente{{i+1}}" (click)="seleccionarCarta(carta, i+1)">
+              <div class="frente" id="frente{{i+1}}">
                 <img src="{{carta.urlImagen}}" alt="img-card">
                 <small>{{carta.valor}}</small>
               </div>
