@@ -7,12 +7,14 @@ import { JuegoComponent } from './component/juego/juego.component';
 import { InicioComponent } from './component/inicio/inicio.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ResultadosComponent } from './component/resultados/resultados.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     JuegoComponent,
-    InicioComponent
+    InicioComponent,
+    ResultadosComponent
   ],
   imports: [
     BrowserModule,

@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'memo-test-idiomas-frontend';
+  
+  year:number
+
+  constructor(){
+    this.year = new Date().getFullYear();
+  }
 }

@@ -33,6 +33,14 @@ export class CartaService {
       movimientos : movimientos
     }
     this.listadoGanadores.push(ganador);
-    localStorage.setItem('ganadores', JSON.stringify(this.listadoGanadores));
+    localStorage.setItem('ganadores', JSON.stringify(this.ganadoresOrdenados()));
+  }
+
+  ganadoresOrdenados(){
+    return this.listadoGanadores.sort(this.compararPorMovimientos);
+  }
+
+  compararPorMovimientos(ganador1:Ganador, ganador2:Ganador){
+    return ganador1.movimientos - ganador2.movimientos;
   }
 }

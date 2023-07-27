@@ -34,7 +34,6 @@
   border: 1px solid #000000;
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-
 }
 
 .frente button, .dorso p, .dorso button {
@@ -44,5 +43,15 @@
 
 .inactivo {
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.8;
+}
+
+.card-juego{
+  opacity: 0.9;
+}
+
+.frente img{
+  margin-top: 1rem;
+  width: 90%;
+  border-radius: 5px;
 }

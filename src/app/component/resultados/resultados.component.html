@@ -1,0 +1,20 @@
+<div class="container text-center">
+    <table class="table table-info">
+      <thead>
+        <tr>
+          <th>Puesto #</th>
+          <th>Nombre Jugador</th>
+          <th>Movimientos</th>
+          <th>Tiempo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ganador of ganadores; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{ganador.nombre}}</td>
+          <td>{{ganador.movimientos}}</td>
+          <td>{{ganador.tiempo}} min</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
