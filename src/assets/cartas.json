@@ -1,0 +1,87 @@
+[
+  {
+  "id": 1,
+  "valor": "Perro",
+  "urlImagen": "perro.png"
+  },
+  {
+  "id": 2,
+  "valor": "Gato",
+  "urlImagen": "gato.jpg"
+  },
+  {
+  "id": 3,
+  "valor": "Lampara",
+  "urlImagen": "lampara.jpeg"
+  },
+  {
+  "id": 4,
+  "valor": "Calabaza",
+  "urlImagen": "calabaza.jpeg"
+  },
+  {
+  "id": 5,
+  "valor": "Notebook",
+  "urlImagen": "notebook.png"
+  },
+  {
+  "id": 6,
+  "valor": "Botella",
+  "urlImagen": "botella.jpeg"
+  },
+  {
+  "id": 7,
+  "valor": "Mouse",
+  "urlImagen": "mouse.jpeg"
+  },
+  {
+  "id": 8,
+  "valor": "Ventilador",
+  "urlImagen": "ventilador.png"
+  },
+  {
+  "id": 9,
+  "valor": "Sarten",
+  "urlImagen": "sarten.png"
+  },
+  {
+  "id": 10,
+  "valor": "Pelota",
+  "urlImagen": "pelota.png"
+  },
+  {
+  "id": 11,
+  "valor": "Vaso",
+  "urlImagen": "vaso.jpeg"
+  },
+  {
+  "id": 12,
+  "valor": "Sombrilla",
+  "urlImagen": "sombrilla.png"
+  },
+  {
+  "id": 13,
+  "valor": "Péz",
+  "urlImagen": "pez.jpeg"
+  },
+  {
+  "id": 14,
+  "valor": "Tenedor",
+  "urlImagen": "tenedor.jpeg"
+  },
+  {
+  "id": 15,
+  "valor": "Anteojos",
+  "urlImagen": "anteojos.png"
+  },
+  {
+  "id": 16,
+  "valor": "Zapatillas",
+  "urlImagen": "zapatillas.png"
+  },
+  {
+  "id": 17,
+  "valor": "Libro",
+  "urlImagen": "libro.png"
+  }
+  ]

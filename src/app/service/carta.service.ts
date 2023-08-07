@@ -7,7 +7,7 @@ import { Ganador } from '../models/ganador';
 })
 export class CartaService {
 
-  apiUrl:string = 'http://localhost:8080/memo-test/v1/cartas';
+  apiUrl:string = '../../assets/cartas.json';
   listadoGanadores:Ganador[] = [];
 
   constructor(private http:HttpClient) { }

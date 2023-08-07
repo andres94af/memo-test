@@ -7,8 +7,8 @@
           <h4>Movimientos: {{contadorMovimientos}}</h4>
           <h4>Aciertos: {{contadorAciertos}}</h4>
         </div>
-        <a (click)="reiniciar()" class="btn btn-warning m-3">Reiniciar</a>
-        <a [routerLink]="''" class="btn btn-danger m-3">Volver</a>
+        <button (click)="reiniciar()" class="btn btn-warning m-3">Reiniciar</button>
+        <button routerLink="" class="btn btn-danger m-3">Volver</button>
       </div>
     </div>
     <div class="col-md-6">
@@ -17,7 +17,7 @@
           <div class="card-container">
             <div class="tarjeta text-center" id="tarjeta{{i+1}}">
               <div class="frente" id="frente{{i+1}}">
-                <img src="{{carta.urlImagen}}" alt="img-card">
+                <img src="../../../assets/imagenes/{{carta.urlImagen}}" alt="img-card">
                 <small>{{carta.valor}}</small>
               </div>
               <div class="dorso" id="frente{{i+1}}" (click)="seleccionarCarta(carta, i+1)"></div>
