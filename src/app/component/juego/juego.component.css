@@ -1,5 +1,5 @@
 .card-container {
-  width: 5rem;;
+  width: 5rem;
   margin-bottom: 1rem;
   aspect-ratio: 1/1.5;
   perspective: 800px;
@@ -14,7 +14,8 @@
   cursor: pointer;
 }
 
-.frente, .dorso {
+.frente,
+.dorso {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -30,13 +31,15 @@
 }
 
 .dorso {
-  background: radial-gradient(green,yellow,red,blue);
+  background: radial-gradient(green, yellow, red, blue);
   border: 1px solid #000000;
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.frente button, .dorso p, .dorso button {
+.frente button,
+.dorso p,
+.dorso button {
   padding: 10px;
   font-size: 16px;
 }
@@ -46,12 +49,27 @@
   opacity: 0.8;
 }
 
-.card-juego{
+.card-juego {
   opacity: 0.9;
 }
 
-.frente img{
+.frente img {
   margin-top: 1rem;
   width: 90%;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 391px) {
+  .card-container {
+    width: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .dorso {
+    background-color: blue;
+  }
+
+  .txt-valor{
+    display: none;
+  }
 }

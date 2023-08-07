@@ -1,16 +1,5 @@
 <div class="container mt-3">
   <div class="row justify-content-between">
-    <div class="col-md-5">
-      <div class="card card-juego">
-        <div class="card-body">
-          <h3>Tiempo: {{tiempoFormateado()}}</h3>
-          <h4>Movimientos: {{contadorMovimientos}}</h4>
-          <h4>Aciertos: {{contadorAciertos}}</h4>
-        </div>
-        <button (click)="reiniciar()" class="btn btn-warning m-3">Reiniciar</button>
-        <button routerLink="" class="btn btn-danger m-3">Volver</button>
-      </div>
-    </div>
     <div class="col-md-6">
       <div class="row">
         <div class="col" *ngFor="let carta of cartas; let i = index">
@@ -18,12 +7,23 @@
             <div class="tarjeta text-center" id="tarjeta{{i+1}}">
               <div class="frente" id="frente{{i+1}}">
                 <img src="../../../assets/imagenes/{{carta.urlImagen}}" alt="img-card">
-                <small>{{carta.valor}}</small>
+                <small class="txt-valor">{{carta.valor}}</small>
               </div>
               <div class="dorso" id="frente{{i+1}}" (click)="seleccionarCarta(carta, i+1)"></div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card card-juego">
+        <div class="card-body">
+          <h4>Tiempo: {{tiempoFormateado()}}</h4>
+          <h5>Movimientos: {{contadorMovimientos}}</h5>
+          <h5>Aciertos: {{contadorAciertos}}</h5>
+        </div>
+        <button (click)="reiniciar()" class="btn btn-sm btn-warning mb-3 mx-3">Reiniciar</button>
+        <button routerLink="" class="btn btn-sm btn-danger mb-3 mx-3">Volver</button>
       </div>
     </div>
   </div>

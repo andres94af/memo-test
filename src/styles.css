@@ -2,6 +2,9 @@ body{
   background-color: pink;
   background-image: url('./assets/cerebro.png');
   background-repeat: no-repeat;
+  background-size: contain;
+  height: 100vh;
+  background-position: center center;
 }
 
 .texto_bordes {
